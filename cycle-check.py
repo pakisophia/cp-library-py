@@ -1,6 +1,12 @@
 #有向グラフのサイクルの有無を判定
 #無向グラフの場合は、Union-Findで判定可能
 
+import sys
+sys.setrecursionlimit(500100)
+ 
+import pypyjit
+pypyjit.set_param('max_unroll_recursion=-1')
+
 
 #入力
 n,m=map(int,input().split())
