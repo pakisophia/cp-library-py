@@ -2,7 +2,7 @@
 
 V,E=map(int,input().split())
 
-INf=2**60
+INf=1e18
 g=[[INf]*V for _ in range(V)]
 
 for i in range(E):
