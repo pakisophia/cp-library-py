@@ -10,7 +10,7 @@ def dijkstra1(s):
         c, v = heapq.heappop(hq)
         if c > cost[v]: # コストが現在のコストよりも高ければスルー
             continue
-        for d, u in e[v]:
+        for d, u in g[v]:
             tmp = d + cost[v]
             if tmp < cost[u]:
                 cost[u] = tmp
@@ -19,9 +19,9 @@ def dijkstra1(s):
 
 #入力
 n,m = map(int,input().split())
-e = [[] for _ in range(n)]
+g = [[] for _ in range(n)]
 for _ in range(m):
     a,b,t = map(int,input().split())
     a,b = a-1, b-1
-    e[a].append((t, b))
-    e[b].append((t, a)) #有向グラフでは削除
+    g[a].append((t, b))
+    g[b].append((t, a)) #有向グラフでは削除
