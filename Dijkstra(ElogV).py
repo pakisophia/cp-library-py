@@ -2,7 +2,7 @@ import heapq
 
 def dijkstra1(s):
     hq = [(0, s)]
-    INf=20**60
+    INf=1e18
     heapq.heapify(hq) # リストを優先度付きキューに変換
     cost = [INf] * n # 行ったことのないところはinf
     cost[s] = 0 # 開始地点は0
