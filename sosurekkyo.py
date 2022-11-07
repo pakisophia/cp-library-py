@@ -1,3 +1,6 @@
+#O(NloglogN)
+
+
 def primes(n):
     is_prime = [True] * (n + 1)
     is_prime[0] = False
