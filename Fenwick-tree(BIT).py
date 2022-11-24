@@ -8,7 +8,7 @@ class Fenwick_Tree:
         self._n = n
         self.data = [0] * n
 
-    def add(self, p, x):
+    def add(self, p, x): #index=pにxを加算する
         assert 0 <= p < self._n
         p += 1
         while p <= self._n:
