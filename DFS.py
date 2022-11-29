@@ -19,11 +19,11 @@ seen=[False]*n #訪問したらTrueにする
 
 def dfs(v): #再起でDFSを定義する
     seen[v]=True #vに到達したことを表す
-        for i in g[v]:
-           if seen[i]==True: #iが探索済みならパス
-              continue
-           else:
-              dfs(i)
+    for i in g[v]:
+       if seen[i]==True: #iが探索済みならパス
+          continue
+       else:
+          dfs(i)
          
          
 #なんかTLEとか出たらPython(3.8.2)提出で、lru_cache試そう
