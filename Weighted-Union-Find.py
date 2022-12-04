@@ -19,6 +19,7 @@ class WeightedUnionFind:
             return y
 
     # 併合
+    # xからyへの距離(重み)がw
     def union(self, x, y, w):
         rx = self.find(x)
         ry = self.find(y)
