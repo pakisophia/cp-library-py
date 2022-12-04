@@ -1,3 +1,5 @@
+#https://at274.hatenablog.com/entry/2018/02/03/140504
+
 class WeightedUnionFind:
     def __init__(self, n):
         self.par = [i for i in range(n+1)]
