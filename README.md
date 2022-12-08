@@ -1,4 +1,4 @@
-# kyoupro-library
+# kyoupro-library(py)
 自分用　競技プログラミングで使用するテンプレートコードをまとめたもの
 ## [union-find](https://github.com/pakisophia/kyoupro-library/blob/main/union-find.py)
 ・頂点の集合を効率的に管理したい時に使用  
