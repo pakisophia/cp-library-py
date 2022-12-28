@@ -1,3 +1,5 @@
+#https://tjkendev.github.io/procon-library/python/graph/scc.html
+
 # 強連結成分分解(SCC): グラフGに対するSCCを行う
 # 入力: <N>: 頂点サイズ, <G>: 順方向の有向グラフ, <RG>: 逆方向の有向グラフ
 # 出力: (<ラベル数>, <各頂点のラベル番号>)
