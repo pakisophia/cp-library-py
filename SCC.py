@@ -1,45 +1,76 @@
-#https://tjkendev.github.io/procon-library/python/graph/scc.html
+"""https://qiita.com/AkariLuminous/items/a2c789cebdd098dcb503"""
+#ac-libraryと使い方がほぼ同じ
 
-# 強連結成分分解(SCC): グラフGに対するSCCを行う
-# 入力: <N>: 頂点サイズ, <G>: 順方向の有向グラフ, <RG>: 逆方向の有向グラフ
-# 出力: (<ラベル数>, <各頂点のラベル番号>)
-def scc(N, G, RG):
-    order = []
-    used = [0]*N
-    group = [None]*N
-    def dfs(s):
-        used[s] = 1
-        for t in G[s]:
-            if not used[t]:
-                dfs(t)
-        order.append(s)
-    def rdfs(s, col):
-        group[s] = col
-        used[s] = 1
-        for t in RG[s]:
-            if not used[t]:
-                rdfs(t, col)
-    for i in range(N):
-        if not used[i]:
-            dfs(i)
-    used = [0]*N
-    label = 0
-    for s in reversed(order):
-        if not used[s]:
-            rdfs(s, label)
-            label += 1
-    return label, group
+import sys
 
-# 縮約後のグラフを構築
-def construct(N, G, label, group):
-    G0 = [set() for i in range(label)]
-    GP = [[] for i in range(label)]
-    for v in range(N):
-        lbs = group[v]
-        for w in G[v]:
-            lbt = group[w]
-            if lbs == lbt:
-                continue
-            G0[lbs].add(lbt)
-        GP[lbs].append(v)
-    return G0, GP
+def csr(n, E):
+    start = [0] * (n + 1)
+    elist = [0] * len(E)
+    # start[i+1] = 頂点 i を始点とする辺の数
+    for e0, e1 in E:
+        start[e0 + 1] += 1
+    #累積和
+    for i in range(1, n + 1):
+        start[i] += start[i - 1]
+    #挿入位置を表すポインタ
+    counter = start[:]
+    for e0, e1 in E:
+        elist[counter[e0]] = e1
+        counter[e0] += 1 # ポインタを進める
+    return start, elist
+
+
+class _SCC_graph:
+    def __init__(self, n):
+        self._n = n
+        self.edges = []
+        sys.setrecursionlimit(max(2*n, sys.getrecursionlimit()))
+    
+    def num_vertices(self):
+        return self._n
+    
+    def add_edge(self, frm, to):
+        self.edges.append([frm, to])
+    
+    def scc_ids(self):
+        start, elist = csr(self._n, self.edges)
+        now_ord, group_num = 0, 0
+        visited = []
+        low = [0] * self._n
+        ord_ = [-1] * self._n
+        ids = [0] * self._n
+
+        def dfs(v):
+            nonlocal now_ord, group_num, visited, low, ord_, ids
+            low[v] = ord_[v] = now_ord
+            now_ord += 1
+            visited.append(v)
+            for i in range(start[v], start[v+1]):
+                to = elist[i]
+                if ord_[to] == -1:
+                    dfs(to)
+                    low[v] = min(low[v], low[to])
+                else:
+                    low[v] = min(low[v], ord_[to])
+            if low[v] == ord_[v]:
+                while True:
+                    u = visited.pop()
+                    ord_[u] = self._n
+                    ids[u] = group_num
+                    if u == v: break
+                group_num += 1
+        
+        for i in range(self._n):
+            if ord_[i] == -1: dfs(i)
+        for i in range(self._n):
+            ids[i] = group_num - 1 - ids[i]
+        
+        return group_num, ids
+
+
+    def scc(self):
+        group_num, ids = self.scc_ids()
+        groups = [[] for _ in range(group_num)]
+        for i in range(self._n):
+            groups[ids[i]].append(i)
+        return groups
