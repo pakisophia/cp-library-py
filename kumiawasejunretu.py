@@ -20,6 +20,9 @@ c=list(itertools.permutations(l,2))
 cc=list(itertools.combinations(l,2))
 #この場合4C2(=6個)の組み合わせがlist(cc)に格納される
 
+#重複組合せを列挙
+li=list(itertools.combiations_with_replacement(l,2))
+
 
 
 
