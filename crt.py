@@ -1,3 +1,6 @@
+#中国剰余定理
+
+
 import typing
  
 def inv_gcd(a: int, b: int) -> typing.Tuple[int, int]:
@@ -21,7 +24,9 @@ def inv_gcd(a: int, b: int) -> typing.Tuple[int, int]:
 def inv_mod(x: int, m: int) -> int:
 	z = inv_gcd(x, m)
 	return z[1]
- 
+
+#rがmodされたものの結果、mがmodのリストを引数として入力する
+#returnとしてtuple型で返す。最初の要素にx≡r(mod m)となるxが格納されており、二つ目の要素にlcm(m1,m2,・・・mn)が格納されている（多分）
 def crt(r: typing.List[int], m: typing.List[int]) -> typing.Tuple[int, int]:
 	r0 = 0
 	m0 = 1
@@ -43,6 +48,8 @@ def crt(r: typing.List[int], m: typing.List[int]) -> typing.Tuple[int, int]:
 		m0 *= u1
 		if r0 < 0:r0 += m0
 	return (r0, m0)
+
+
     
 
 
