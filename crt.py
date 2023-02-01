@@ -1,4 +1,5 @@
 #中国剰余定理
+#https://mathlandscape.com/chinese-remainder/#toc3
 
 
 import typing
