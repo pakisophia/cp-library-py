@@ -15,7 +15,7 @@ class Fenwick_Tree:
             self.data[p - 1] += x
             p += p & -p
 
-    def sum(self, l, r):
+    def sum(self, l, r): #半開区間[l,r)の合計値が求まる
         assert 0 <= l <= r <= self._n
         return self._sum(r) - self._sum(l)
 
