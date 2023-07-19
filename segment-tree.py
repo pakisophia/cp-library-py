@@ -7,6 +7,7 @@ https://qiita.com/takayg1/items/c811bd07c21923d7ec69
 
 #####segfunc#####
 def segfunc(x, y): #funcを定義
+    return #(ここに関数を定義)
 
 #################
 
